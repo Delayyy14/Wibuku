@@ -1,103 +1,98 @@
 import './App.css';
-import CardElaina from './component/CardElaina'; 
-import Navbar from './component/navbar';         
-import elaina from './image/elaina.jpg';        
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import Navbar from './component/navbar';
+import SignIn from './pages/SignIn';
+import CardElaina from './component/CardElaina';
+import Comment from './component/Comment';
+import elaina from './image/elaina.jpg';
 import Nisekoi_chitoge from './image/Nisekoi_chitoge.jpg';
 import mikasa from './image/mikasa.jpg';
-import Comment from './component/Comment';       
 
+// Komponen Loading
+function Loading() {
+  return (
+    <div className="h-screen flex justify-center items-center bg-white">
+      <p className="text-sky-800 text-xl font-bold animate-pulse">Loading...</p>
+    </div>
+  );
+}
 
-function App() {
+// Komponen Halaman Home
+function Home() {
   return (
     <>
       <Navbar />
 
-      
+      {/* Hero */}
       <div className="min-h-screen bg-sky-800 flex flex-col md:flex-row items-center justify-center px-10 py-20 gap-10">
-        
         <div className="w-full md:w-1/2 flex justify-center animate-pulse">
-          <img
-            src={elaina}
-            alt="Elaina"
-            className="max-w-xs rounded-xl shadow-xl"
-          />
+          <img src={elaina} alt="Elaina" className="max-w-xs rounded-xl shadow-xl" />
         </div>
-
-        
         <div className="w-full md:w-1/2 text-white text-center md:text-left">
           <h1 className="text-4xl font-bold mb-4">Selamat Datang di WibukuStore!</h1>
           <p className="mb-6 text-lg">
-            WibukuStore adalah toko online khusus para wibu yang menyediakan berbagai merchandise anime dari berbagai genre — mulai dari action, romance, isekai, slice of life, hingga fantasy! 🎉
-
-<br />Temukan koleksi figure, poster, gantungan kunci, jaket, manga, dan barang-barang eksklusif dari karakter favoritmu. Kami jamin kualitas produk terbaik, pengiriman cepat, dan harga bersahabat!
-
-<br />Bergabunglah bersama ribuan pelanggan lain yang telah menemukan tempat belanja anime impian mereka di WibukuStore! 💫
+            WibukuStore adalah toko online khusus para wibu yang menyediakan berbagai merchandise anime dari berbagai genre.
+            <br />Figure, poster, manga, dan barang eksklusif lainnya!
+            <br />Temukan karakter favoritmu di sini! 💫
           </p>
-          <a
-            href="#pelanggan"
-            className="bg-white text-sky-800 font-semibold px-6 py-3 rounded hover:bg-sky-700 hover:text-white transition"
-          >
+          <a href="#pelanggan" className="bg-white text-sky-800 font-semibold px-6 py-3 rounded hover:bg-sky-700 hover:text-white transition">
             Lihat Stock Anime
           </a>
         </div>
       </div>
 
-      {/* Section Pelanggan */}
+      {/* Produk */}
       <div id="pelanggan" className="py-16 px-5 flex flex-col items-center">
-        <h1 className="text-center font-bold text-3xl text-sky-900 mb-10">
-          List Anime
-        </h1>
-
+        <h1 className="text-center font-bold text-3xl text-sky-900 mb-10">List Produk Anime</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <CardElaina 
-          title="Elaina"
-          description="Ability bisa punya tongkang yang bisa melayang dan memiliki sihir"
-          image={elaina}/>
-          <CardElaina 
-          title="Mikasa"
-          description="Dapat Gear dan kesetiaan dari hati"
-          image={mikasa}/>
-          <CardElaina 
-          title="Chitoge"
-          description="Ratu tsundere"
-          image={Nisekoi_chitoge}/>
-          <CardElaina />
-          <CardElaina />
-          <CardElaina />
+          <CardElaina title="Elaina" description="Penyihir cantik dari negeri sihir." image={elaina} />
+          <CardElaina title="Mikasa" description="Prajurit setia dari Shiganshina." image={mikasa} />
+          <CardElaina title="Chitoge" description="Ratu tsundere dari Nisekoi." image={Nisekoi_chitoge} />
         </div>
       </div>
 
+      {/* Komentar */}
       <div className="py-16 px-5 flex flex-col items-center bg-sky-100">
-        <h1 className="text-center font-bold text-3xl text-sky-800 mb-10">
-          Komentar Pelanggan
-        </h1>
-
+        <h1 className="text-center font-bold text-3xl text-sky-800 mb-10">Komentar Pelanggan</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <Comment
-            name="Elaina"
-            comment="Produk sihirnya berkualitas! Aku suka banget wkwk."
-            avatar={elaina}
-            rating={5}
-            offset="translate-y-0"
-          />
-          <Comment
-            name="Hinata"
-            comment="Pelayanan ramah dan pengiriman cepat."
-            avatar={Nisekoi_chitoge}
-            rating={4}
-            offset="translate-y-2"
-          />
-          <Comment
-            name="Mikasa"
-            comment="Kurang satu bintang karena box agak penyok."
-            avatar={mikasa}
-            rating={4}
-            offset="-translate-y-1"
-          />
-          
+          <Comment name="Elaina" comment="Produk sihirnya berkualitas!" avatar={elaina} rating={5} offset="translate-y-0" />
+          <Comment name="Hinata" comment="Pengiriman cepat dan aman." avatar={Nisekoi_chitoge} rating={4} offset="translate-y-2" />
+          <Comment name="Mikasa" comment="Box agak penyok, tapi oke." avatar={mikasa} rating={4} offset="-translate-y-1" />
         </div>
       </div>
     </>
+  );
+}
+
+// Wrapper untuk efek loading saat route berubah
+function RouteWithLoader() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const timeout = setTimeout(() => setLoading(false), 500); // 0.5 detik
+    return () => clearTimeout(timeout);
+  }, [location]);
+
+  if (loading) return <Loading />;
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signin" element={<SignIn />} />
+    </Routes>
+  );
+}
+
+// Root App
+function App() {
+  return (
+    <Router>
+      <RouteWithLoader />
+    </Router>
   );
 }
 

@@ -15,6 +15,10 @@ function Navbar() {
           <li><a href="#" className="bg-sky-800 text-white border border-sky-800 p-2 rounded-2xl
                hover:bg-white hover:text-sky-800
                transition duration-300 ease-in-out">Kontak</a></li>
+          <li><a href="/SignIn" className="bg-white text-sky-800 border border-sky-800 p-2 rounded-2xl hover:bg-sky-800 hover:text-white transition">
+  Sign In
+</a>
+</li>
         </ul>
       </div>
     </nav>
