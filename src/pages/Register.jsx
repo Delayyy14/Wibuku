@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import bg from '../image/bgSignIn.jpg'; // background gambar
-import elaina from '../image/elaina.jpg'; // gambar elaina
+import wibuku from '../image/wibuku.jpg'; // gambar elaina
 
 function Register() {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ function Register() {
       className="min-h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="bg-white/20 backdrop-blur-md p-10 rounded-xl shadow-lg w-96 text-white text-center">
+      <div className="bg-white/20 backdrop-blur-md p-10 shadow-lg w-96 text-white text-center">
         <img
-          src={elaina}
+          src={wibuku}
           alt="Elaina"
           className="w-24 h-24 mx-auto rounded-full shadow-lg mb-5 object-cover"
         />
