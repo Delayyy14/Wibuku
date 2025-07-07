@@ -1,14 +1,15 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import bg from '../image/bgSignIn.jpg'; // ganti dengan gambar background kamu
+import bg from '../image/bgSignIn.jpg'; // background gambar
 import elaina from '../image/elaina.jpg'; // gambar elaina
 
-function SignIn() {
+function Register() {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    navigate('/');
+    // logika register bisa ditambahkan di sini
+    navigate('/signin');
   };
 
   return (
@@ -22,9 +23,15 @@ function SignIn() {
           alt="Elaina"
           className="w-24 h-24 mx-auto rounded-full shadow-lg mb-5 object-cover"
         />
-        <h2 className="text-2xl font-bold mb-5 drop-shadow">Sign In</h2>
+        <h2 className="text-2xl font-bold mb-5 drop-shadow">Register</h2>
 
-        <form onSubmit={handleSubmit} className="text-left">
+        <form onSubmit={handleRegister} className="text-left">
+          <input
+            type="text"
+            placeholder="Nama Lengkap"
+            className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
+            required
+          />
           <input
             type="email"
             placeholder="Email"
@@ -42,17 +49,14 @@ function SignIn() {
             type="submit"
             className="w-full bg-sky-800 text-white py-2 rounded hover:bg-sky-700 transition"
           >
-            Masuk
+            Daftar
           </button>
         </form>
 
         <p className="mt-4 text-sm text-black">
-          Belum punya akun?{' '}
-          <Link
-            to="/register"
-            className="underline hover:text-sky-300 transition"
-          >
-            Daftar di sini
+          Sudah punya akun?{' '}
+          <Link to="/signin" className="underline hover:text-sky-300 transition">
+            Masuk di sini
           </Link>
         </p>
       </div>
@@ -60,4 +64,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Register;

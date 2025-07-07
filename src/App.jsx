@@ -9,6 +9,8 @@ import Comment from './component/Comment';
 import elaina from './image/elaina.jpg';
 import Nisekoi_chitoge from './image/Nisekoi_chitoge.jpg';
 import mikasa from './image/mikasa.jpg';
+import Register from './pages/Register';
+
 
 // Komponen Loading
 function Loading() {
@@ -83,6 +85,7 @@ function RouteWithLoader() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/signin" element={<SignIn />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
