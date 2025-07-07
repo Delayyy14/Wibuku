@@ -17,18 +17,18 @@ function Register() {
       className="min-h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="bg-white/20 backdrop-blur-md p-10 shadow-lg w-96 text-white text-center">
+      <div className="bg-white/20 backdrop-blur-md rounded-xl p-10 shadow-lg w-96 text-white text-center">
         <img
           src={wibuku}
           alt="Elaina"
-          className="w-24 h-24 mx-auto rounded-full shadow-lg mb-5 object-cover"
+          className="w-24 h-24 mx-auto rounded shadow-lg mb-5 object-cover"
         />
         <h2 className="text-2xl font-bold mb-5 drop-shadow">Register</h2>
 
         <form onSubmit={handleRegister} className="text-left">
           <input
             type="text"
-            placeholder="Nama Lengkap"
+            placeholder="Nickname"
             className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
             required
           />
