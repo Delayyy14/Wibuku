@@ -4,7 +4,7 @@ import Navbar from './component/navbar';
 import elaina from './image/elaina.jpg';        
 import Nisekoi_chitoge from './image/Nisekoi_chitoge.jpg';
 import mikasa from './image/mikasa.jpg';
-import Comment from './component/comment';       
+import Comment from './component/Comment';       
 
 
 function App() {
