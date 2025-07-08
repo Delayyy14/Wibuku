@@ -53,7 +53,6 @@ export default function ProfilStack({
           { id: 1, img: fotoevent },
           { id: 2, img:     booth },
           { id: 3, img: cosplay },
-          { id: 4, img: "https://via.placeholder.com/300" }
         ]
   );
 

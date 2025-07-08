@@ -15,7 +15,13 @@ import 'aos/dist/aos.css';
 import ScroolFM from "./component/ScroolFM";
 import GalleryEvent from './component/GalleryEvent';
 import wibuku from './image/wibuku.jpg'
-
+import rem from './image/rem.jpg'
+import march from './image/march.jpg'
+import cat from './image/cat.jpg';
+import wielino from './image/wielino.jpg';
+import kaosanime from './image/kaosanime.jpg';
+import actionfigure from './image/figure.jpg';
+import jaket from './image/jaket.jpg';
 
 
 import { motion } from 'framer-motion';
@@ -30,7 +36,7 @@ function Loading() {
           <motion.span
             key={i}
             initial={{ y: 0 }}
-            animate={{ y: [0, -15, 0] }}
+            animate={{ y: [5, -15, 5] }}
             transition={{
               repeat: Infinity,
               duration: 1,
@@ -80,16 +86,16 @@ function Home() {
         <h1 className="text-center font-bold text-3xl text-sky-900 mb-10">List Produk Anime</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <div data-aos="fade-right">
-            <CardElaina title="Elaina" description="Penyihir cantik dari negeri sihir." image={elaina} />
+            <CardElaina title="Kaos Luffy Gear 5" description="lorem" image={kaosanime} />
           </div>
           <div data-aos="fade-up">
-            <CardElaina title="Mikasa" description="Prajurit setia dari Shiganshina." image={mikasa} />
+            <CardElaina title="Action Figure Miku" description="lorem" image={actionfigure} />
           </div>
           <div data-aos="fade-left">
-            <CardElaina title="Chitoge" description="Ratu tsundere dari Nisekoi." image={Nisekoi_chitoge} />
+            <CardElaina title="Jaket Attack On Titan" description="lorem" image={jaket} />
           </div>
           <div data-aos="fade-right">
-            <CardElaina title="Elaina" description="Penyihir cantik dari negeri sihir." image={elaina} />
+            <CardElaina title="Rem" description="Rem si biru" image={rem} />
           </div>
           <div data-aos="fade-up">
             <CardElaina title="Mikasa" description="Prajurit setia dari Shiganshina." image={mikasa} />
@@ -107,12 +113,12 @@ function Home() {
       <div className="py-16 px-5 flex flex-col items-center bg-sky-100">
         <h1 className="text-center font-bold text-3xl text-sky-800 mb-10">Komentar Pelanggan</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <Comment name="Elaina" comment="Produk sihirnya berkualitas!" avatar={elaina} rating={5} offset="translate-y-0" />
-          <Comment name="Hinata" comment="Pengiriman cepat dan aman." avatar={Nisekoi_chitoge} rating={4} offset="translate-y-2" />
-          <Comment name="Mikasa" comment="Box agak penyok, tapi oke." avatar={mikasa} rating={4} offset="-translate-y-1" />
-          <Comment name="Mikasa" comment="Box agak penyok, tapi oke." avatar={mikasa} rating={4} offset="-translate-y-1" />
-          <Comment name="Mikasa" comment="Box agak penyok, tapi oke." avatar={mikasa} rating={4} offset="-translate-y-1" />
-          <Comment name="Mikasa" comment="Box agak penyok, tapi oke." avatar={mikasa} rating={4} offset="-translate-y-1" />
+          <Comment name="Elaina" comment="Produk figurenya berkualitas!" avatar={elaina} rating={5} offset="translate-y-0" />
+          <Comment name="Chitoge" comment="Pengiriman cepat dan aman." avatar={Nisekoi_chitoge} rating={4} offset="translate-y-2" />
+          <Comment name="Rem" comment="Box agak penyok, tapi oke." avatar={rem} rating={3} offset="-translate-y-1" />
+          <Comment name="March 7th" comment="Lucu banget barangnya" avatar={march} rating={5} offset="-translate-y-1" />
+          <Comment name="Cukurukuk" comment="Admin nya ramah, Miaw!" avatar={cat} rating={5} offset="-translate-y-1" />
+          <Comment name="Wielino Ino" comment="Pengiriman secepat cahaya, cihuy" avatar={wielino} rating={5} offset="-translate-y-1" />
         </div>
       </div>
 

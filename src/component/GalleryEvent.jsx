@@ -22,18 +22,6 @@ const dataEvent = [
     title: "Salah satu Cosplayer yang hadir",
     desc: "Cosplayer dengan kostum yang memukau dan penuh semangat hadir meramaikan acara."
   },
-  {
-    id: 4,
-    img: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-    title: "Kompetisi Cosplay & Lomba Gambar",
-    desc: "Event yang seru dan ramai dengan banyak cosplayer dari seluruh Indonesia."
-  },    
-    {
-    id: 5,
-    img: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-    title: "Kompetisi Cosplay & Lomba Gambar",
-    desc: "Event yang seru dan ramai dengan banyak cosplayer dari seluruh Indonesia."
-  }
 ];
 
 export default function GalleryEvent() {
