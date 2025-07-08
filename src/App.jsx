@@ -10,11 +10,13 @@ import elaina from './image/elaina.jpg';
 import Nisekoi_chitoge from './image/Nisekoi_chitoge.jpg';
 import mikasa from './image/mikasa.jpg';
 import Register from './pages/Register';
-import Footer from './component/footer';
+import AOS from 'aos'; 
+import 'aos/dist/aos.css';
+import ScroolFM from "./component/ScroolFM";
+import GalleryEvent from './component/GalleryEvent';
+import wibuku from './image/wibuku.jpg'
 
 
-import AOS from 'aos'; // ✅ Tambahkan ini
-import 'aos/dist/aos.css'; // ✅ Tambahkan ini
 
 import { motion } from 'framer-motion';
 
@@ -50,10 +52,10 @@ function Home() {
     <>
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero Section */}
       <div className="min-h-screen bg-sky-800 flex flex-col md:flex-row items-center justify-center px-10 py-20 gap-10">
         <div className="w-full md:w-1/2 flex justify-center" data-aos="zoom-in">
-          <img src={elaina} alt="Elaina" className="max-w-xs rounded-xl shadow-xl" />
+          <img src={wibuku} alt="Elaina" className="max-w-xs rounded-xl shadow-xl" />
         </div>
         <div className="w-full md:w-1/2 text-white text-center md:text-left">
           <h1 className="text-4xl font-bold mb-4">Selamat Datang di WibukuStore!</h1>
@@ -68,7 +70,12 @@ function Home() {
         </div>
       </div>
 
-      {/* Produk */}
+      {/* Scroll Velocity Parallax */}
+      <div className="w-full bg-sky-800 py-10">
+        <ScroolFM />
+      </div>
+
+      {/* Produk Section */}
       <div id="pelanggan" className="py-16 px-5 flex flex-col items-center">
         <h1 className="text-center font-bold text-3xl text-sky-900 mb-10">List Produk Anime</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -92,8 +99,11 @@ function Home() {
           </div>
         </div>
       </div>
+      <div id="galeri">
+        <GalleryEvent />
+      </div>
 
-      {/* Komentar */}
+      {/* Komentar Section */}
       <div className="py-16 px-5 flex flex-col items-center bg-sky-100">
         <h1 className="text-center font-bold text-3xl text-sky-800 mb-10">Komentar Pelanggan</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -106,15 +116,13 @@ function Home() {
         </div>
       </div>
 
-<div className='bg-sky-600 w-full h-10 flex items-center justify-center'>
-  <p> © Fall 2025 WibukuStore. All rights reserved.</p>
-</div>
-
+      {/* Footer */}
+      <div className='bg-sky-600 w-full h-10 flex items-center justify-center'>
+        <p>© Fall 2025 WibukuStore. All rights reserved.</p>
+      </div>
     </>
   );
-
-    
-  };
+}
 
 // Wrapper untuk efek loading saat route berubah
 function RouteWithLoader() {

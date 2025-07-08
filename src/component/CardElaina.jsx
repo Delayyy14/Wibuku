@@ -15,6 +15,7 @@ function CardElaina({ title, description, image }) {
         {description}
       </p>
       <button className="mt-4 bg-sky-700 text-white px-4 py-2 rounded group-hover:bg-white group-hover:text-sky-700 transition">
+        
         Lihat Detail
       </button>
     </div>
