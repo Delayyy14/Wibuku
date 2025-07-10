@@ -23,6 +23,7 @@ import actionfigure from './image/figure.jpg';
 import jaket from './image/jaket.jpg';
 import { motion } from 'framer-motion';
 import ContactForm from './component/contact';
+import ProdukListWithLove from './component/ProdukList';
 
 function Loading() {
   const letters = 'Tunggu yaa...'.split('');
@@ -59,7 +60,7 @@ function Home() {
       {/* Hero Section */}
       <div className="min-h-screen bg-sky-800 flex flex-col md:flex-row items-center justify-center px-10 py-20 gap-10">
         <div className="w-full md:w-1/2 flex justify-center" data-aos="zoom-in">
-          <img src={wibuku} alt="Elaina" className="max-w-xs rounded-xl shadow-xl" />
+          <img src={wibuku} alt="Elaina" className="max-w-xs rounded-xl shadow-2xl" />
         </div>
         <div className="w-full md:w-1/2 text-white text-center md:text-left">
           <h1 className="text-4xl font-bold mb-4">Selamat Datang di WibukuStore!</h1>
@@ -79,30 +80,10 @@ function Home() {
         <ScroolFM />
       </div>
 
-      {/* Produk Section */}
-      <div id="pelanggan" className="py-16 px-5 flex flex-col items-center">
-        <h1 className="text-center font-bold text-3xl text-sky-900 mb-10">List Produk Anime</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <div data-aos="fade-right">
-            <CardElaina title="Kaos Luffy Gear 5" description="lorem" image={kaosanime} />
-          </div>
-          <div data-aos="fade-up">
-            <CardElaina title="Action Figure Miku" description="lorem" image={actionfigure} />
-          </div>
-          <div data-aos="fade-left">
-            <CardElaina title="Jaket Attack On Titan" description="lorem" image={jaket} />
-          </div>
-          <div data-aos="fade-right">
-            <CardElaina title="Rem" description="Rem si biru" image={rem} />
-          </div>
-          <div data-aos="fade-up">
-            <CardElaina title="Mikasa" description="Prajurit setia dari Shiganshina." image={mikasa} />
-          </div>
-          <div data-aos="fade-left">
-            <CardElaina title="Chitoge" description="Ratu tsundere dari Nisekoi." image={Nisekoi_chitoge} />
-          </div>
-        </div>
-      </div>
+<div id="produk">
+  <ProdukListWithLove />
+</div>
+
       <div id="galeri">
         <GalleryEvent />
       </div>
@@ -119,8 +100,10 @@ function Home() {
           <Comment name="Wielino Ino" comment="Pengiriman secepat cahaya, cihuy" avatar={wielino} rating={5} offset="-translate-y-1" />
         </div>
       </div>
+<div id="contact">
+   <ContactForm />
+</div>
 
- <ContactForm />
 
       {/* Footer */}
       <div className='bg-sky-600 w-full h-10 flex items-center justify-center'>
