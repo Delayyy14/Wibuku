@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
 import Navbar from './component/navbar';
 import SignIn from './pages/SignIn';
 import CardElaina from './component/CardElaina';
@@ -22,8 +21,6 @@ import wielino from './image/wielino.jpg';
 import kaosanime from './image/kaosanime.jpg';
 import actionfigure from './image/figure.jpg';
 import jaket from './image/jaket.jpg';
-
-
 import { motion } from 'framer-motion';
 
 function Loading() {

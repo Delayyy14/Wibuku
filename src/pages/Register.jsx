@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import bg from '../image/bgSignIn.jpg'; // background gambar
 import wibuku from '../image/wibuku.jpg'; // gambar elaina
@@ -6,9 +6,21 @@ import wibuku from '../image/wibuku.jpg'; // gambar elaina
 function Register() {
   const navigate = useNavigate();
 
+  // State untuk input form
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleRegister = (e) => {
     e.preventDefault();
-    // logika register bisa ditambahkan di sini
+
+    // Simpan data ke localStorage
+    localStorage.setItem('nickname', nickname);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+
+    console.log('Akun berhasil disimpan ke localStorage');
+
     navigate('/signin');
   };
 
@@ -29,12 +41,16 @@ function Register() {
           <input
             type="text"
             placeholder="Nickname"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
             className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
             required
           />
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
             required
           />
@@ -42,6 +58,8 @@ function Register() {
             type="password"
             minLength={7}
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
             required
           />

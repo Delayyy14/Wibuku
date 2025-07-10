@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import bg from '../image/bgSignIn.jpg'; // ganti dengan gambar background kamu
-import wibuku from '../image/wibuku.jpg'; // gambar elaina
+import bg from '../image/bgSignIn.jpg';
+import wibuku from '../image/wibuku.jpg';
 
 function SignIn() {
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/');
+
+    // Ambil data akun dari localStorage
+    const storedEmail = localStorage.getItem('email');
+    const storedPassword = localStorage.getItem('password');
+
+    // Validasi
+    if (email === storedEmail && password === storedPassword) {
+      console.log('Login berhasil!');
+      navigate('/');
+    } else {
+      setError('Email atau password salah!');
+    }
   };
 
   return (
@@ -24,10 +39,14 @@ function SignIn() {
         />
         <h2 className="text-2xl font-bold mb-5 drop-shadow">Sign In</h2>
 
+        {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
+
         <form onSubmit={handleSubmit} className="text-left">
           <input
-            type="nama"
-            placeholder="Username or Email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
             required
           />
@@ -35,6 +54,8 @@ function SignIn() {
             type="password"
             minLength={7}
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
             required
           />
