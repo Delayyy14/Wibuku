@@ -3,17 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [nickname, setNickname] = useState('');
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Cek login dari localStorage
   useEffect(() => {
@@ -34,29 +25,25 @@ function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 backdrop-blur-md
-        ${scrolled
-          ? 'bg-sky-800 rounded-xl shadow-md w-[95%] mt-2'
-          : 'bg-sky-800 w-full rounded-none mt-0'}
-      `}
-    >
-      <div className="container mx-auto flex justify-between items-center p-4 text-white">
-        <h1 className="font-bold text-xl">WibukuStore</h1>
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-sky-800 text-white rounded-full shadow-md w-[90%] px-6 py-3 backdrop-blur-lg transition-all duration-300">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <h1 className="font-bold text-lg whitespace-nowrap">WibukuStore</h1>
 
-        <ul className="flex gap-4 items-center">
+        {/* Menu tengah */}
+        <ul className="flex gap-4 justify-center items-center flex-1">
           <li>
             <a
               href="#"
-              className="bg-white text-sky-800 border border-white px-4 py-2 rounded-full hover:bg-sky-700 hover:text-white hover:border-sky-700 transition duration-300"
+              className=" text-white  hover:bg-sky-700 p-2 m-2 rounded-full hover:text-white hover:border-sky-700 transition duration-300 font-bold"
             >
               Beranda
             </a>
           </li>
           <li>
             <a
-              href="#pelanggan"
-              className="bg-white text-sky-800 border border-white px-4 py-2 rounded-full hover:bg-sky-700 hover:text-white hover:border-sky-700 transition duration-300"
+              href="#pelanggan" 
+              className="text-white  hover:bg-sky-700 p-2 m-2 rounded-full hover:text-white hover:border-sky-700 transition duration-300 font-bold"
             >
               Produk
             </a>
@@ -64,35 +51,34 @@ function Navbar() {
           <li>
             <a
               href="#galeri"
-              className="bg-white text-sky-800 border border-white px-4 py-2 rounded-full hover:bg-sky-700 hover:text-white hover:border-sky-700 transition duration-300"
+              className="text-white  hover:bg-sky-700 p-2 m-2 rounded-full hover:text-white hover:border-sky-700 transition duration-300 font-bold"
             >
               Galeri
             </a>
           </li>
+        </ul>
 
+        {/* Login / Logout */}
+        <div className="flex items-center gap-3 whitespace-nowrap">
           {isLoggedIn ? (
             <>
-              <li className="text-yellow-300 font-semibold">Hai, {nickname}!</li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 text-white border border-red-500 px-4 py-2 rounded-full hover:bg-red-400 transition duration-300"
-                >
-                  Logout
-                </button>
-              </li>
+              <span className="text-yellow-300 font-semibold text-sm">Hai, {nickname}!</span>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white border border-red-500 px-4 py-2 rounded-full hover:bg-red-400 transition duration-300 text-sm"
+              >
+                Logout
+              </button>
             </>
           ) : (
-            <li>
-              <a
-                href="/signin"
-                className="bg-yellow-400 text-sky-900 border border-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-sky-800 transition duration-300 font-semibold"
-              >
-                Sign In
-              </a>
-            </li>
+            <a
+              href="/signin"
+              className="bg-yellow-400 text-sky-900 border border-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-sky-800 transition duration-300 font-semibold text-sm"
+            >
+              Sign In
+            </a>
           )}
-        </ul>
+        </div>
       </div>
     </nav>
   );

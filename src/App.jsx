@@ -22,6 +22,7 @@ import kaosanime from './image/kaosanime.jpg';
 import actionfigure from './image/figure.jpg';
 import jaket from './image/jaket.jpg';
 import { motion } from 'framer-motion';
+import ContactForm from './component/contact';
 
 function Loading() {
   const letters = 'Tunggu yaa...'.split('');
@@ -118,6 +119,8 @@ function Home() {
           <Comment name="Wielino Ino" comment="Pengiriman secepat cahaya, cihuy" avatar={wielino} rating={5} offset="-translate-y-1" />
         </div>
       </div>
+
+ <ContactForm />
 
       {/* Footer */}
       <div className='bg-sky-600 w-full h-10 flex items-center justify-center'>

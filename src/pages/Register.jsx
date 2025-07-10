@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import bg from '../image/bgSignIn.jpg'; // background gambar
 import wibuku from '../image/wibuku.jpg'; // gambar elaina
 
+
+
 function Register() {
   const navigate = useNavigate();
 
@@ -81,5 +83,6 @@ function Register() {
     </div>
   );
 }
+
 
 export default Register;

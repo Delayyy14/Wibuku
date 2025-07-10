@@ -39,7 +39,7 @@ function SignIn() {
         />
         <h2 className="text-2xl font-bold mb-5 drop-shadow">Sign In</h2>
 
-        {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
+        
 
         <form onSubmit={handleSubmit} className="text-left">
           <input
@@ -76,6 +76,7 @@ function SignIn() {
             Daftar di sini
           </Link>
         </p>
+        {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
       </div>
     </div>
   );
