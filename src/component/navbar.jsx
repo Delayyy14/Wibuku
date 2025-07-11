@@ -1,93 +1,129 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 function Navbar() {
+  const location = useLocation();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [nickname, setNickname] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null); // null jika belum login
 
+  // Ambil data user dari localStorage saat komponen dimuat
   useEffect(() => {
-    const email = localStorage.getItem('email');
-    const password = localStorage.getItem('password');
-    const savedNickname = localStorage.getItem('nickname');
-
-    if (email && password) {
-      setIsLoggedIn(true);
-      setNickname(savedNickname);
+    const storedUser = localStorage.getItem('user'); // contoh key: 'user'
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // simpan ke state
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
-    navigate('/signin');
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/');
   };
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const handleNavigation = (sectionId) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMenuOpen(false);
+  };
+
+  const navItemClass = (path) =>
+    `hover:text-sky-300 transition ${
+      location.pathname === path ? 'text-sky-300 font-semibold' : 'text-white'
+    }`;
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-sky-800 text-white rounded-full shadow-md w-[90%] px-6 py-3 backdrop-blur-lg transition-all duration-300">
-      <div className="flex items-center justify-between relative">
-        {/* Logo */}
-        <h1 className="font-bold text-lg whitespace-nowrap">WibukuStore</h1>
+    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] md:w-[90%] lg:w-[80%]">
+      <nav className="bg-sky-900/70 backdrop-blur-md text-white px-6 py-3 rounded-full shadow-xl flex justify-between items-center">
+        <Link to="/" className="text-xl font-bold hover:text-sky-300">
+          OtakuMart
+        </Link>
 
-        {/* Hamburger (mobile only) */}
-        <button
-          className="md:hidden text-white"
-          onClick={toggleMenu}
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="hidden md:flex items-center space-x-6 font-medium">
+          <Link to="/" className={navItemClass('/')}>Home</Link>
+          <Link to="/products" className={navItemClass('/products')}>Products</Link>
+          <button onClick={() => handleNavigation('contact')} className="hover:text-sky-300">
+            Contact
+          </button>
+        </div>
 
-        {/* Menu Items */}
-        <ul className={`flex-col md:flex-row absolute md:static top-14 left-0 w-full md:w-auto bg-sky-800 rounded-xl md:bg-transparent md:flex md:items-center md:gap-2 transition-all duration-300 ease-in-out ${menuOpen ? 'flex' : 'hidden'} md:flex`}>
-          <li>
-            <a href="#" className="block text-white hover:bg-sky-700 p-2 m-2 rounded-full font-bold text-center">
-              Beranda
-            </a>
-          </li>
-          <li>
-            <a href="#pelanggan" className="block text-white hover:bg-sky-700 p-2 m-2 rounded-full font-bold text-center">
-              Produk
-            </a>
-          </li>
-          <li>
-            <a href="#galeri" className="block text-white hover:bg-sky-700 p-2 m-2 rounded-full font-bold text-center">
-              Galeri
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="block text-white hover:bg-sky-700 p-2 m-2 rounded-full font-bold text-center">
-              Contact Us
-            </a>
-          </li>
-        </ul>
-
-        {/* Login/Logout */}
-        <div className="hidden md:flex items-center gap-3 whitespace-nowrap">
-          {isLoggedIn ? (
+        {/* Auth or User Info */}
+        <div className="hidden md:flex items-center space-x-4">
+          {user ? (
             <>
-              <span className="text-yellow-300 font-semibold text-sm">Hai, {nickname}!</span>
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white border border-red-500 px-4 py-2 rounded-full hover:bg-red-400 transition duration-300 text-sm"
+              <span className="text-sm text-white">Hi, {user.name} 👋</span>
+              <Link
+                to="/profile"
+                className="bg-white text-sky-800 px-4 py-1.5 rounded-full hover:bg-sky-100 font-semibold"
               >
+                Profile
+              </Link>
+              <button onClick={handleLogout} className="hover:text-red-300">
                 Logout
               </button>
             </>
           ) : (
-            <a
-              href="/signin"
-              className="bg-yellow-400 text-sky-900 border border-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-sky-800 transition duration-300 font-semibold text-sm"
-            >
-              Sign In
-            </a>
+            <>
+              <Link to="/signin" className="hover:text-sky-300">Sign In</Link>
+              <Link
+                to="/register"
+                className="bg-white text-sky-800 px-4 py-1.5 rounded-full hover:bg-sky-100 font-semibold"
+              >
+                Register
+              </Link>
+            </>
           )}
         </div>
-      </div>
-    </nav>
+
+        {/* Mobile Menu Button */}
+        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+
+      {/* Mobile Dropdown */}
+      {menuOpen && (
+        <div className="mt-2 md:hidden bg-sky-900/80 backdrop-blur-md rounded-2xl shadow-lg px-4 py-4 space-y-3 text-center">
+          <Link to="/" className={navItemClass('/')} onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/products" className={navItemClass('/products')} onClick={() => setMenuOpen(false)}>Products</Link>
+          <button onClick={() => handleNavigation('contact')} className="block w-full hover:text-sky-300">
+            Contact
+          </button>
+          <hr className="border-white/20" />
+          {user ? (
+            <>
+              <p className="text-white">Hi, {user.name}</p>
+              <Link to="/profile" onClick={() => setMenuOpen(false)} className="block w-full hover:text-sky-300">
+                Profile
+              </Link>
+              <button onClick={() => { handleLogout(); setMenuOpen(false); }} className="block w-full text-red-300">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/signin" onClick={() => setMenuOpen(false)}>Sign In</Link>
+              <Link
+                to="/register"
+                onClick={() => setMenuOpen(false)}
+                className="bg-white text-sky-800 px-4 py-2 rounded-full hover:bg-sky-100"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 

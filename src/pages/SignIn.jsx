@@ -13,11 +13,9 @@ function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Ambil data akun dari localStorage
     const storedEmail = localStorage.getItem('email');
     const storedPassword = localStorage.getItem('password');
 
-    // Validasi
     if (email === storedEmail && password === storedPassword) {
       console.log('Login berhasil!');
       navigate('/');
@@ -28,18 +26,24 @@ function SignIn() {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center"
+      className="min-h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center relative"
       style={{ backgroundImage: `url(${bg})` }}
     >
+      {/* Tombol kembali pojok kiri atas */}
+      <Link
+        to="/"
+        className="absolute top-4 left-4 text-white text-sm underline hover:text-sky-200 z-50"
+      >
+        ← Kembali ke Beranda
+      </Link>
+
       <div className="bg-white/20 backdrop-blur-md p-10 rounded-xl shadow-lg w-96 text-white text-center">
         <img
           src={wibuku}
-          alt="Elaina"
+          alt="Wibuku"
           className="w-24 h-24 mx-auto rounded shadow-lg mb-5 object-cover"
         />
         <h2 className="text-2xl font-bold mb-5 drop-shadow">Sign In</h2>
-
-        
 
         <form onSubmit={handleSubmit} className="text-left">
           <input
@@ -76,7 +80,7 @@ function SignIn() {
             Daftar di sini
           </Link>
         </p>
-        {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
+        {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
       </div>
     </div>
   );
