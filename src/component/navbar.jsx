@@ -6,13 +6,13 @@ function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [user, setUser] = useState(null); // null jika belum login
+  const [user, setUser] = useState(null); 
 
-  // Ambil data user dari localStorage saat komponen dimuat
+
   useEffect(() => {
-    const storedUser = localStorage.getItem('user'); // contoh key: 'user'
+    const storedUser = localStorage.getItem('user'); 
     if (storedUser) {
-      setUser(JSON.parse(storedUser)); // simpan ke state
+      setUser(JSON.parse(storedUser)); 
     }
   }, []);
 

@@ -13,12 +13,23 @@ function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Ambil data user dari localStorage (email, password, role)
     const storedEmail = localStorage.getItem('email');
     const storedPassword = localStorage.getItem('password');
+    const storedRole = localStorage.getItem('role');
 
-    if (email === storedEmail && password === storedPassword) {
+    // Cek jika email dan password benar dengan yang disimpan di localStorage
+    if (email === storedEmail && password === storedPassword)   {
       console.log('Login berhasil!');
-      navigate('/');
+
+      // Arahkan berdasarkan role
+      if (storedRole === 'admin') {
+        navigate('/dashboard-admin');
+      } else if (storedRole === 'member') {
+        navigate('/');
+      } else {
+        setError('Role tidak dikenali!');
+      }
     } else {
       setError('Email atau password salah!');
     }
@@ -29,7 +40,7 @@ function SignIn() {
       className="min-h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center relative"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      {/* Tombol kembali pojok kiri atas */}
+      {/* Tombol kembali */}
       <Link
         to="/"
         className="absolute top-4 left-4 text-white text-sm underline hover:text-sky-200 z-50"
@@ -73,10 +84,7 @@ function SignIn() {
 
         <p className="mt-4 text-sm text-black">
           Belum punya akun?{' '}
-          <Link
-            to="/register"
-            className="underline hover:text-sky-300 transition"
-          >
+          <Link to="/register" className="underline hover:text-sky-300 transition">
             Daftar di sini
           </Link>
         </p>
