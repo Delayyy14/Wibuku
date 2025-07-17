@@ -46,8 +46,7 @@ function Home() {
         <div className='flex justify-center mt-20'>
         <img src={wibuku} alt="logoapp" className='h-50 rounded'/>
         </div>
-        
-        <h1 className="text-4xl font-bold mb-4">OtakuMart</h1>
+        <h1 className="text-4xl font-bold mb-5 mt-5">OtakuMart</h1>
         <h2 className="text-xl mb-2">Koleksi Merch Anime Terbaik</h2>
         <p className="mb-4">Temukan merchandise favoritmu. Figure, poster, jaket, dan lainnya!</p>
         <Link to="/products">

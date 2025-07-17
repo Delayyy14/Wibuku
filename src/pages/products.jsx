@@ -21,7 +21,7 @@ function Products() {
     <Navbar />
 <div className='p-10'></div>
       <div className="p-6">        
-        <button
+        <button 
           onClick={() => navigate('/')}
           className="mb-4 text-sm text-blue-600 hover:underline"
         >
@@ -29,7 +29,7 @@ function Products() {
         </button>
         <h1 className="text-2xl font-bold mb-4 text-center">Daftar Produk</h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
             {products.map(product => (
               <div key={product.id} className="border border-sky-600 rounded p-4 shadow-md bg-white">
                 <img

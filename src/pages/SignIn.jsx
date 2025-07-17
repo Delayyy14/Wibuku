@@ -10,30 +10,33 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Ambil data user dari localStorage (email, password, role)
-    const storedEmail = localStorage.getItem('email');
-    const storedPassword = localStorage.getItem('password');
-    const storedRole = localStorage.getItem('role');
+  try {
+    const response = await fetch('https://68775431dba809d901eec221.mockapi.io/api/v1/role');
+    const users = await response.json();
 
-    // Cek jika email dan password benar dengan yang disimpan di localStorage
-    if (email === storedEmail && password === storedPassword)   {
-      console.log('Login berhasil!');
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
 
-      // Arahkan berdasarkan role
-      if (storedRole === 'admin') {
+    if (user) {
+      if (user.role === 'admin') {
         navigate('/dashboard-admin');
-      } else if (storedRole === 'member') {
+      } else if (user.role === 'member') {
         navigate('/');
       } else {
-        setError('Role tidak dikenali!');
+        setError('Email atau password salah');
       }
     } else {
-      setError('Email atau password salah!');
+      setError('Email atau password salah');
     }
-  };
+  } catch (error) {
+    console.log(error);
+    setError('Terjadi kesalahan, silakan coba lagi');
+  }
+};
 
   return (
     <div
@@ -93,5 +96,4 @@ function SignIn() {
     </div>
   );
 }
-
 export default SignIn;

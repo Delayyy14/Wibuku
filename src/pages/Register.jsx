@@ -1,29 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import bg from '../image/bgSignIn.jpg'; // background gambar
-import wibuku from '../image/wibuku.jpg'; // gambar elaina
+import bg from '../image/bgSignIn.jpg'; 
+import wibuku from '../image/wibuku.jpg'; 
 
 
 
 function Register() {
   const navigate = useNavigate();
-
-  // State untuk input form
-  const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleRegister = (e) => {
+  const [error, setError] = useState('');
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Simpan data ke localStorage
-    localStorage.setItem('nickname', nickname);
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
+    try {
+      const response = await fetch('https://68775431dba809d901eec221.mockapi.io/api/v1/role', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        role: 'member', // Default role buat register biasa
+      }),
+      });
 
-    console.log('Akun berhasil disimpan ke localStorage');
-
-    navigate('/signin');
+      if (response.ok) {
+        const data = await response.json();
+        console.log('User registered:', data);
+        navigate('/signin'); 
+      }
+      else {
+        console.error('Registration failed');
+      }
+    }
+    catch (setError) {
+      console.error('Error during registration:', error);
+    }
   };
 
   return (
@@ -40,14 +54,6 @@ function Register() {
         <h2 className="text-2xl font-bold mb-5 drop-shadow">Register</h2>
 
         <form onSubmit={handleRegister} className="text-left">
-          <input
-            type="text"
-            placeholder="Nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
-            required
-          />
           <input
             type="email"
             placeholder="Email"
