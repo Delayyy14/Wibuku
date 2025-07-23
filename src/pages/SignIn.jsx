@@ -1,99 +1,131 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import bg from '../image/bgSignIn.jpg';
-import wibuku from '../image/wibuku.jpg';
+import React from "react";
+import { FcGoogle} from "react-icons/fc";
+import { FaFacebookF } from 'react-icons/fa';
+import { BiLogoXing } from "react-icons/bi";
+import elaina from "../image/elaina.jpg";
+import { useNavigate } from "react-router-dom";
 
-function SignIn() {
+export default function LoginPage() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    const response = await fetch('https://68775431dba809d901eec221.mockapi.io/api/v1/role');
-    const users = await response.json();
-
-    const user = users.find(
-      (user) => user.email === email && user.password === password
-    );
-
-    if (user) {
-      if (user.role === 'admin') {
-        navigate('/dashboard-admin');
-      } else if (user.role === 'member') {
-        navigate('/');
-      } else {
-        setError('Email atau password salah');
-      }
-    } else {
-      setError('Email atau password salah');
-    }
-  } catch (error) {
-    console.log(error);
-    setError('Terjadi kesalahan, silakan coba lagi');
-  }
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
+  const handleClick = () => {
+    alert("Google Sign In clicked");
+  };
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat flex justify-center items-center relative"
-      style={{ backgroundImage: `url(${bg})` }}
-    >
-      {/* Tombol kembali */}
-      <Link
-        to="/"
-        className="absolute top-4 left-4 text-white text-sm underline hover:text-sky-200 z-50"
-      >
-        ← Kembali ke Beranda
-      </Link>
+    <div className="flex h-screen bg-gray-100">
+      {/* Form Login */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md bg-white p-10 rounded-lg shadow-lg scale-85 md:scale-90">
+          <h2 className="text-3xl font-bold mb-3 text-gray-800 text-center">
+            Selamat datang
+          </h2>
+          <h2 className="text-md font-semibold mb-6 text-gray-800 text-center">
+            Masuk ke akun kamu untuk melanjutkan
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+<div className="flex items-center px-3 gap-3 py-2 shadow-md rounded-md bg-white focus-within:ring-2 focus-within:ring-blue-500 mb-4">
+  <i className="fa-solid fa-envelope text-gray-400"></i>
+  <input
+    required
+    type="email"
+    placeholder="Email"
+    className="w-full focus:outline-none font-semibold"
+  />
+</div>
 
-      <div className="bg-white/20 backdrop-blur-md p-10 rounded-xl shadow-lg w-96 text-white text-center">
+<div className="flex items-center px-3 gap-3 py-2 shadow-md rounded-md bg-white focus-within:ring-2 focus-within:ring-blue-500 mb-4">
+  <i className="fa-solid fa-lock text-gray-400"></i>
+  <input
+    required
+    minLength={5}
+    type="password"
+    placeholder="Password"
+    className="w-full focus:outline-none font-semibold"
+  />
+</div>
+            <div className="flex justify-between mb-4 text-sm">
+              <label className="items-center">
+                <input
+                  type="checkbox"
+                  className="form-checkbox text-blue-600"
+                />
+                <span className="ml-2 text-gray-600">Ingat saya</span>
+              </label>
+              <a
+                href="#"
+                className="text-blue-600 hover:text-blue-500 p-1 hover:bg-gray-100 rounded-full"
+              >
+                Lupa password?
+              </a>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full mb-6 bg-gradient-to-br from-blue-600 to-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            >
+              Masuk
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center justify-between mb-4">
+              <hr className="flex-grow border-t border-gray-300" />
+              <span className="mx-2 text-gray-500">Atau masuk dengan</span>
+              <hr className="flex-grow border-t border-gray-300" />
+            </div>
+
+            {/* Google Button */}
+            <div className="flex items-center justify-center mb-4 gap-2">
+              <button
+                type="button"
+                onClick={handleClick}
+                className="flex items-center justify-center bg-white border border-gray-300 rounded-md px-4 py-2 shadow hover:bg-gray-100 transition"
+              >
+                <FcGoogle className="w-5 h-5" />
+              </button>
+
+              <button 
+              type="button"
+              onClick={handleClick}
+              className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 shadow hover:bg-gray-100 transition"
+              >
+              <FaFacebookF className="text-blue-600 w-5 h-5" />
+            </button>
+              <button 
+              type="button"
+              onClick={handleClick}
+              className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-md px-4 py-2 shadow hover:bg-gray-100 transition"
+              >
+              <BiLogoXing className="text-blue-600 w-5 h-5" />
+            </button>
+            </div>
+
+
+            {/* Daftar Link */}
+            <p className="text-sm text-gray-600 text-center">
+              Belum punya akun?{" "}
+              <a
+                href="/register"
+                className="text-blue-600 hover:text-blue-500 font-semibold"
+              >
+                Daftar di sini
+              </a>
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <div className="hidden md:flex w-1/2 items-center justify-center bg-gray-100">
         <img
-          src={wibuku}
-          alt="Wibuku"
-          className="w-24 h-24 mx-auto rounded shadow-lg mb-5 object-cover"
+          src={elaina}
+          alt="Elaina"
+          className="w-2/3 max-w-sm object-contain rounded-lg shadow"
         />
-        <h2 className="text-2xl font-bold mb-5 drop-shadow">Sign In</h2>
-
-        <form onSubmit={handleSubmit} className="text-left">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
-            required
-          />
-          <input
-            type="password"
-            minLength={7}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 mb-4 border rounded bg-white/40 text-black placeholder-gray-700"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-sky-800 text-white py-2 rounded hover:bg-sky-700 transition"
-          >
-            Masuk
-          </button>
-        </form>
-
-        <p className="mt-4 text-sm text-black">
-          Belum punya akun?{' '}
-          <Link to="/register" className="underline hover:text-sky-300 transition">
-            Daftar di sini
-          </Link>
-        </p>
-        {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
       </div>
     </div>
   );
 }
-export default SignIn;

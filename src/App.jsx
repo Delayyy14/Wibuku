@@ -11,6 +11,7 @@ import Products from './pages/products';
 import ProdukListWithLove from './component/ProdukList';
 import GalleryEvent from './component/GalleryEvent';
 import DashboardAdmin from './pages/DashboardAdmin';
+import ProductAdmin from './pages/ProductAdmin';
 
 {/* images */}
 import elaina from './image/elaina.jpg';
@@ -122,7 +123,7 @@ function RouteWithLoader() {
       <Route path="/register" element={<Register />} />
       <Route path="/products" element={<Products />} />
       <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-
+      <Route path="/product-admin" element={<ProductAdmin />} />
     </Routes>
   );
 }
